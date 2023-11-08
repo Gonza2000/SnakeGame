@@ -8,4 +8,4 @@ la versión final tendrá características como :
 2. Comer manzanas, aumentar la puntuación y el tamaño del cuerpo.
 3. Si la cabeza de snake toca su cuerpo, pierdes una vida, pero regresas al centro con el mismo tamaño del cuerpo.
 4. Si la cabeza toca alguno de los límites de la pantalla, pierdes una vida, pero regresas al centro con el mismo tamaño del cuerpo.
-5. El juego termina cuando pierdes 3 vidas y el tamaño de snake y la puntuación se reinician.
+5. El juego termina cuando pierdes 3 vidas, el tamaño de snake y la puntuación se reinician.
