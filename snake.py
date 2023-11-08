@@ -2,10 +2,9 @@ import turtle
 import time
 import random
 
-# Elementos principales (Pantalla, Manzana, Snake)
-pantalla = turtle.Screen()
-
 # Pantalla
+
+pantalla = turtle.Screen()
 
 delay = 0.001
 pantalla.title('Snake Game')
@@ -16,7 +15,7 @@ pantalla.tracer(1)
 pantalla.setup(width=1280, height=720)
 
 
-# Elemento cabeza
+# Función para crear elementos
 
 
 def crear_elemento(forma, color, velocidad):
@@ -29,6 +28,7 @@ def crear_elemento(forma, color, velocidad):
     elemento.home()
     return elemento
 
+# Creación objeto cabeza
 
 cabeza = crear_elemento('square', '#d40404', 2)
 cabeza.tecla = ''
@@ -74,10 +74,10 @@ pantalla.onkeypress(abajo, 's')
 # Elemento Manzana
 manzana = crear_elemento('circle', '#FF004D', 0)
 manzana.setposition(200, 100)
+
+
+# Lista donde contiene cuerpo de snake
 cuerpo_snake = []
-# Game Over
-
-
 # Bucle Principal
 
 
