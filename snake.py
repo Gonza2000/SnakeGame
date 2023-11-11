@@ -8,7 +8,6 @@ pantalla = turtle.Screen()
 
 delay = 0.001
 pantalla.title('Snake Game')
-
 #las animaciones se dibujan con cierto delay
 pantalla.tracer(1)
 
@@ -53,6 +52,7 @@ def abajo():
 
 
 def movimiento_snake():
+     
     if cabeza.tecla == 'd':
         cabeza.setx(cabeza.xcor() + 30)
     if cabeza.tecla == 'c':
@@ -70,6 +70,11 @@ pantalla.onkeypress(derecha, 'd')
 pantalla.onkeypress(izquierda, 'a')
 pantalla.onkeypress(arriba, 'w')
 pantalla.onkeypress(abajo, 's')
+#Capturar letras mayusculas, necesario para que el jugador pueda jugar
+pantalla.onkeypress(derecha, 'D')
+pantalla.onkeypress(izquierda, 'A')
+pantalla.onkeypress(arriba, 'W')
+pantalla.onkeypress(abajo, 'S')
 
 # Elemento Manzana
 manzana = crear_elemento('circle', '#FF004D', 0)
@@ -98,7 +103,8 @@ while True:
         cuerpo = crear_elemento('square', '#FF004D', 0)
         cuerpo_snake.append(cuerpo)
 
-
+   
+        
     for i in range(len(cuerpo_snake) - 1, 0, -1):
         x = cuerpo_snake[i - 1].xcor()
         y = cuerpo_snake[i - 1].ycor()
