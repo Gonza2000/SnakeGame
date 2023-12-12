@@ -2,7 +2,6 @@ import turtle
 import time
 import random
 
-
 delay = 0.06
 
 # Pantalla
@@ -11,7 +10,7 @@ pantalla = turtle.Screen()
 pantalla.title('Snake Game')
 pantalla.setup(width=1280, height=720)
 pantalla.tracer(0)
-pantalla.bgcolor('black')
+pantalla.bgpic('Diseño sin título.png')
 
 
 # Función para crear elementos
@@ -27,16 +26,19 @@ def crear_elemento(forma, color, velocidad):
     elemento.home()
     return elemento
 
+
 # Creación objeto cabeza
 
 cabeza = crear_elemento('square', '#d40404', 2)
 cabeza.tecla = ''
-puntaje_snake = crear_elemento('turtle', '#d40404', 2)
+puntaje_snake = crear_elemento('turtle', 'white', 2)
 puntaje_snake.hideturtle()
-vida_snake = crear_elemento('turtle', '#d40404', 2)
+vida_snake = crear_elemento('turtle', 'white', 2)
 vida_snake.hideturtle()
 vida_snake.goto(-560, 200)
 puntaje_snake.goto(-600, 300)
+
+#veneno = crear_elemento('circle','red',2)
 
 # Movimiento
 
@@ -57,7 +59,6 @@ def abajo():
 
 
 def movimiento_snake():
-     
     if cabeza.tecla == 'd':
         cabeza.setx(cabeza.xcor() + 30)
     if cabeza.tecla == 'c':
@@ -75,7 +76,7 @@ pantalla.onkeypress(derecha, 'd')
 pantalla.onkeypress(izquierda, 'a')
 pantalla.onkeypress(arriba, 'w')
 pantalla.onkeypress(abajo, 's')
-#Capturar letras mayusculas, necesario para que el jugador pueda jugar
+# Capturar letras mayusculas, necesario para que el jugador pueda jugar
 pantalla.onkeypress(derecha, 'D')
 pantalla.onkeypress(izquierda, 'A')
 pantalla.onkeypress(arriba, 'W')
@@ -86,32 +87,30 @@ color_random = ["#" + "".join([random.choice("0123456789ABCDEF") for j in range(
 manzana = crear_elemento('circle', color_random, 0)
 manzana.setposition(200, 100)
 
-
 # Lista donde contiene cuerpo de snake
 cuerpo_snake = []
 # Bucle Principal
 puntaje = 0
-vidas=3
+vidas = 3
 puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
 vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
 
-
 while True:
     pantalla.update()
-    #si pierdes
+    # si pierdes
     if vidas == 0:
-        ventana_perdiste = crear_elemento('square','#d40404',0)
+        ventana_perdiste = crear_elemento('square', '#d40404', 0)
         ventana_perdiste.hideturtle()
         ventana_perdiste.write("Perdiste :( intentalo de nuevo", align="center", font=("Arial", 16, "italic"))
-        puntaje=0
+        puntaje = 0
         vidas = 3
         vida_snake.clear()
         vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
         puntaje_snake.clear()
         puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
         for i in cuerpo_snake:
-            i.goto(1000,1000)    
-        cuerpo_snake=[]
+            i.goto(1000, 1000)
+        cuerpo_snake = []
     # Límites
     if cabeza.xcor() > 600 or cabeza.xcor() < -620 or cabeza.ycor() > 340 or cabeza.ycor() < -335:
         cabeza.tecla = ''
@@ -119,11 +118,11 @@ while True:
         cabeza.home()
         manzana.setposition(200, 100)
         for i in cuerpo_snake:
-            i.goto(1000,1000)    
-        vidas-=1 
+            i.goto(1000, 1000)
+        vidas -= 1
         vida_snake.clear()
         vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
-    
+
     # Cambio de posición de la Manzana
     if cabeza.distance(manzana) < 50:
         color_manzana = manzana.pencolor()
@@ -134,21 +133,20 @@ while True:
         manzana.color(color_random)
         cuerpo = crear_elemento('square', color_manzana, 0)
         cuerpo_snake.append(cuerpo)
-        puntaje+=1
+        puntaje += 1
         puntaje_snake.clear()
         puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
-   
-  
+
     for i in range(len(cuerpo_snake) - 1, 0, -1):
         x = cuerpo_snake[i - 1].xcor()
         y = cuerpo_snake[i - 1].ycor()
         cuerpo_snake[i].goto(x, y)
 
     if len(cuerpo_snake) > 0:
-            x = cabeza.xcor()
-            y = cabeza.ycor()
-            cuerpo_snake[0].goto(x, y)    
+        x = cabeza.xcor()
+        y = cabeza.ycor()
+        cuerpo_snake[0].goto(x, y)
 
     movimiento_snake()
-    
+
     time.sleep(delay)
