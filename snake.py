@@ -101,8 +101,8 @@ while True:
     #si pierdes
     if vidas == 0:
         ventana_perdiste = crear_elemento('square','#d40404',0)
-        ventana_perdiste.write("Perdiste :(, intentalo de nuevo", align="center", font=("Arial", 16, "italic"))
-        ventana_perdiste.shapesize(stretch_wid=10,stretch_len=10,outline=1)
+        ventana_perdiste.hideturtle()
+        ventana_perdiste.write("Perdiste :( intentalo de nuevo", align="center", font=("Arial", 16, "italic"))
         puntaje=0
         vidas = 3
         vida_snake.clear()
