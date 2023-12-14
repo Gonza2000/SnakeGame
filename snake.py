@@ -1,6 +1,7 @@
 import turtle
 import time
 import random
+import winsound
 
 delay = 0.08
 
@@ -24,7 +25,10 @@ def crear_elemento(forma, color, velocidad):
     elemento.penup()
     elemento.home()
     return elemento
+#funcion sonido para comer manzana
 
+def sonido_manzana():
+    winsound.PlaySound("nombre_del_sonido.wav", winsound.SND_FILENAME)
 
 # Creación de objetos
 
