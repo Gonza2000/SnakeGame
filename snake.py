@@ -38,36 +38,38 @@ vida_snake.hideturtle()
 vida_snake.goto(-560, 200)
 puntaje_snake.goto(-600, 300)
 
-#veneno = crear_elemento('circle','red',2)
+#villano= crear_elemento('triangle','black',2)
+
 
 # Movimiento
 
 def derecha():
-    cabeza.tecla = 'd'
-
+    if cabeza.tecla != 'izquierda':  
+        cabeza.tecla = 'derecha'
 
 def izquierda():
-    cabeza.tecla = 'c'
-
+    if cabeza.tecla != 'derecha':
+        cabeza.tecla = 'izquierda'
 
 def arriba():
-    cabeza.tecla = 'a'
-
+    if cabeza.tecla != 'abajo':  
+        cabeza.tecla = 'arriba'
 
 def abajo():
-    cabeza.tecla = 'b'
+    if cabeza.tecla != 'arriba':  
+        cabeza.tecla = 'abajo'
+
 
 
 def movimiento_snake():
-    if cabeza.tecla == 'd':
+    if cabeza.tecla == 'derecha':
         cabeza.setx(cabeza.xcor() + 30)
-    if cabeza.tecla == 'c':
+    if cabeza.tecla == 'izquierda':
         cabeza.setx(cabeza.xcor() - 30)
-    if cabeza.tecla == 'a':
+    if cabeza.tecla == 'arriba':
         cabeza.sety(cabeza.ycor() + 30)
-    if cabeza.tecla == 'b':
+    if cabeza.tecla == 'abajo':
         cabeza.sety(cabeza.ycor() - 30)
-
 
 # Teclado
 
@@ -95,19 +97,23 @@ vidas = 3
 puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
 vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
 
+
+#Función para mover la tortuga de un punto a otro
 while True:
     pantalla.update()
+    
     # si pierdes
     if vidas == 0:
         ventana_perdiste = crear_elemento('square', '#d40404', 0)
         ventana_perdiste.hideturtle()
         ventana_perdiste.write("Perdiste :( intentalo de nuevo", align="center", font=("Arial", 16, "italic"))
         puntaje = 0
+        puntaje_snake.clear()
+        puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
         vidas = 3
         vida_snake.clear()
         vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
-        puntaje_snake.clear()
-        puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
+
         for i in cuerpo_snake:
             i.goto(1000, 1000)
         cuerpo_snake = []
@@ -123,7 +129,7 @@ while True:
         vida_snake.clear()
         vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
 
-    # Cambio de posición de la Manzana
+    # Comer y cambiar posicion de manzana
     if cabeza.distance(manzana) < 50:
         color_manzana = manzana.pencolor()
         x = random.randint(-620, 620)
@@ -147,6 +153,22 @@ while True:
         y = cabeza.ycor()
         cuerpo_snake[0].goto(x, y)
 
+    #checar la colisión con el cuerpo
     movimiento_snake()
-
+    for cuerpo in cuerpo_snake:
+        if cuerpo.distance(cabeza)<20:
+            cabeza.home()
+            time.sleep(1)
+            cabeza.tecla=""
+            vidas-=1 
+            vida_snake.clear()
+            vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
+            for i in cuerpo_snake:
+                i.goto(1000, 1000)  
+        if vidas == 0:
+            vida_snake.clear()
+            vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
+            puntaje_snake.clear()
+            puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
+            cuerpo_snake=[] 
     time.sleep(delay)
