@@ -1,7 +1,6 @@
 import turtle
 import time
 import random
-import string
 
 delay = 0.06
 
@@ -94,7 +93,7 @@ pantalla.onkeypress(arriba, 'W')
 pantalla.onkeypress(abajo, 'S')
 
 # Elemento Manzana
-color_random = ["#" + "".join([random.choice("0123456789ABCDEF") for j in range(6)])]
+color_random = ["#" + "".join([random.choice("0123456789ABCDEF") for j in range(6)])] 
 manzana = crear_elemento('circle', color_random, 0)
 manzana.setposition(200, -100)
 
@@ -105,12 +104,10 @@ puntaje = 0
 puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
 vidas = 3
 vida_snake.write(f"Vida: {vidas}", align="left", font=("Arial", 16, "italic"))
-punto_inicial = (-200, 0)
-punto_final = (200, 0)
-longitud = random.randint(1, 6)  # Longitud aleatoria entre 1 y 6 letras
 
 
-#Función para mover la tortuga de un punto a otro
+
+
 while True:
     
     pantalla.update()
@@ -138,12 +135,8 @@ while True:
             cuerpo.goto(1000,1000)
         cuerpo_snake=[]
         mensaje_derrota.color("#9B00FF")
-        mensaje_derrota.write(f"Perdiste Uwu, pulsa cualquier tecla para intentarlo de nuevo", align="center", font=("Verdana", 30, "italic"))
+        mensaje_derrota.write(f"Perdiste :(, pulsa cualquier tecla para intentarlo de nuevo", align="center", font=("Verdana", 30, "italic"))
         
-            
-
-    # si pierdes
-    
     # Límites
     if cabeza.xcor() > 600 or cabeza.xcor() < -620 or cabeza.ycor() > 340 or cabeza.ycor() < -335:
         
@@ -154,17 +147,17 @@ while True:
         time.sleep(1)
         cabeza.home()
         manzana.setposition(200, 100)
-        for i in cuerpo_snake:
-            i.goto(1000, 1000)
-            
+        for cuerpo in cuerpo_snake:
+            cuerpo.goto(1000, 1000)
+    #si la cabeza topa al villano, te resta una vida y te vas al home        
     if cabeza.distance(villano)<20 or cabeza.distance(villano2)<20 :
         cabeza.tecla=""
         cabeza.home()
         vidas-=1
         vida_snake.clear()
         vida_snake.write(f"Vida: {vidas}", align="left", font=("Arial", 16, "italic"))
-        for i in cuerpo_snake:
-            i.goto(1000, 1000)
+        for cuerpo in cuerpo_snake:
+            cuerpo.goto(1000, 1000)
 
     for cuerpo in cuerpo_snake:
         if cuerpo.distance(villano)<20 or cuerpo.distance(villano2)<20:
@@ -173,8 +166,8 @@ while True:
             vidas-=1
             vida_snake.clear()
             vida_snake.write(f"Vida: {vidas}", align="left", font=("Arial", 16, "italic"))
-            for i in cuerpo_snake:
-                i.goto(1000, 1000)
+            for cuerpo in cuerpo_snake:
+                cuerpo.goto(1000, 1000)
 
     # Comer y cambiar posicion de manzana
     if cabeza.distance(manzana) < 50:
@@ -207,7 +200,7 @@ while True:
             mensaje_derrota.write(f"", align="left", font=("Arial", 16, "italic"))
     #checar la colisión con el cuerpo
     for cuerpo in cuerpo_snake:
-        if cuerpo.distance(cabeza)<20 and  cabeza.xcor()!=0 and cabeza.ycor()!=0:
+        if cuerpo.distance(cabeza)<20 and cabeza.xcor()!=0 and cabeza.ycor()!=0:
             cabeza.tecla=""
             vidas-=1
             vida_snake.clear()
