@@ -165,6 +165,17 @@ while True:
         vida_snake.write(f"Vida: {vidas}", align="left", font=("Arial", 16, "italic"))
         for i in cuerpo_snake:
             i.goto(1000, 1000)
+
+    for cuerpo in cuerpo_snake:
+        if cuerpo.distance(villano)<20 or cuerpo.distance(villano2)<20:
+            cabeza.tecla=""
+            cabeza.home()
+            vidas-=1
+            vida_snake.clear()
+            vida_snake.write(f"Vida: {vidas}", align="left", font=("Arial", 16, "italic"))
+            for i in cuerpo_snake:
+                i.goto(1000, 1000)
+
     # Comer y cambiar posicion de manzana
     if cabeza.distance(manzana) < 50:
         color_manzana = manzana.pencolor()
