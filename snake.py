@@ -155,20 +155,5 @@ while True:
 
     #checar la colisión con el cuerpo
     movimiento_snake()
-    for cuerpo in cuerpo_snake:
-        if cuerpo.distance(cabeza)<20:
-            cabeza.home()
-            time.sleep(1)
-            cabeza.tecla=""
-            vidas-=1 
-            vida_snake.clear()
-            vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
-            for i in cuerpo_snake:
-                i.goto(1000, 1000)  
-        if vidas == 0:
-            vida_snake.clear()
-            vida_snake.write(f"Vidas: {vidas}", align="center", font=("Arial", 16, "italic"))
-            puntaje_snake.clear()
-            puntaje_snake.write(f"Puntaje: {puntaje}", align="left", font=("Arial", 16, "italic"))
-            cuerpo_snake=[] 
+    
     time.sleep(delay)
