@@ -1,7 +1,8 @@
 import turtle
 import time
 import random
-import winsound
+
+
 
 delay = 0.08
 
@@ -11,7 +12,7 @@ pantalla = turtle.Screen()
 pantalla.title('Snake Game')
 pantalla.setup(width=1280, height=720)
 pantalla.tracer(0)
-pantalla.bgpic('Diseño sin título.png')
+pantalla.bgpic('33.png')
 
 
 # Función para crear elementos
@@ -27,8 +28,6 @@ def crear_elemento(forma, color, velocidad):
     return elemento
 #funcion sonido para comer manzana
 
-def sonido_manzana():
-    winsound.PlaySound("nombre_del_sonido.wav", winsound.SND_FILENAME)
 
 # Creación de objetos
 
@@ -47,9 +46,9 @@ meta = crear_elemento('square', "black", 2)
 meta.goto(-600,300)
 mensaje_derrota.hideturtle()
 mensaje_derrota.goto(0, 60)
-villano = crear_elemento('triangle', 'black', 2)
+villano = crear_elemento('triangle', 'white', 2)
 villano.goto(2000, 2000)
-villano2 = crear_elemento('triangle', 'black', 2)
+villano2 = crear_elemento('triangle', 'white', 2)
 meta.hideturtle()
 villano2.goto(2000, 2000)
 meta.color("white")
@@ -110,7 +109,7 @@ pantalla.onkeypress(abajo, 'Down')
 color_random = ["#" + "".join([random.choice("0123456789ABCDEF") for j in range(6)])]
 manzana = crear_elemento('circle', color_random, 0)
 manzana.setposition(200, -100)
-
+manzana.pencolor("white")
 # Lista donde contiene cuerpo de snake
 cuerpo_snake = []
 
@@ -178,7 +177,7 @@ while True:
         for cuerpo in cuerpo_snake:
             cuerpo.goto(1000, 1000)
         cuerpo_snake = []
-        mensaje_derrota.color("#9B00FF")
+        mensaje_derrota.color("white")
         mensaje_derrota.write(f"Perdiste :(, pulsa cualquier tecla para intentarlo de nuevo", align="center",
                               font=("Verdana", 30, "italic"))
 
